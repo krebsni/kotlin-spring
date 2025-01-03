@@ -1,12 +1,22 @@
 package com.example.kotlinspring
 
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.query
 import java.util.UUID
 
 @Service
-class MessageService(private val db: JdbcTemplate) {
+class MessageService(private val db: MessageRepository) {
+    fun findMessages(): List<Message> = db.findAll().toList()
+
+    fun findMessage(id: String): Message? = db.findByIdOrNull(id)
+
+    fun save(message: Message): Message = db.save(message)
+}
+
+@Service
+class MessageServiceOld(private val db: JdbcTemplate) {
     fun findMessages(): List<Message> = db.query("SELECT * FROM messages") { rs, _ ->
         Message(rs.getString("id"), rs.getString("text"))
     }
