@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 
 ### Get by id
-GET http://localhost:8080/2
+GET http://localhost:8080/49646ceb-d623-4368-b760-e7b6ac6abcba
 
 
 ### Get all messages
